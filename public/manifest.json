@@ -1,0 +1,32 @@
+{
+  "name": "IQMAIL — Global Family Platform",
+  "short_name": "IQMAIL",
+  "description": "Global Family Email Platform by ESOneWorld",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f0f4ff",
+  "theme_color": "#3b82f6",
+  "categories": ["productivity", "communication"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Inbox",
+      "url": "/?category=inbox",
+      "description": "Go to Inbox"
+    },
+    {
+      "name": "Admin Panel",
+      "url": "/admin",
+      "description": "Open Admin Panel"
+    }
+  ]
+}
