@@ -1,28 +1,20 @@
-{ margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Segoe UI', sans-serif; background: #1a1a2e; min-height: 100vh; color: white; }
-.auth-container { max-width: 400px; margin: 100px auto; padding: 2rem; background: rgba(255,255,255,0.1); border-radius: 15px; }
-.auth-container h2 { text-align: center; margin-bottom: 1.5rem; color: #00d2ff; }
-.auth-container input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid rgba(255,255,255,0.2); background: rgba(255,255,255,0.1); border-radius: 8px; color: white; }
-.auth-container button { width: 100%; padding: 12px; margin: 10px 0; background: #00d2ff; border: none; border-radius: 8px; color: white; cursor: pointer; }
-.app-container { max-width: 1000px; margin: 0 auto; padding: 1rem; }
-.app-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 15px; margin-bottom: 1rem; }
-.app-header h1 { color: #00d2ff; }
-.logout-btn { padding: 8px 20px; background: #e74c3c; border: none; border-radius: 8px; color: white; cursor: pointer; }
-.app-nav { display: flex; gap: 1rem; margin-bottom: 1rem; }
-.app-nav button { padding: 12px 30px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; cursor: pointer; }
-.app-nav button.active { background: #00d2ff; }
-.app-main { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 2rem; min-height: 600px; }
-.email-item { padding: 1rem; margin: 10px 0; background: rgba(255,255,255,0.05); border-radius: 8px; cursor: pointer; }
-.email-item:hover { background: rgba(255,255,255,0.1); }
-.email-item.unread { border-left: 4px solid #00d2ff; }
-.email-header { display: flex; justify-content: space-between; margin-bottom: 0.5rem; }
-.email-subject { font-weight: bold; margin-bottom: 0.5rem; }
-.email-preview { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
-.email-detail { padding: 2rem; }
-.back-btn { padding: 8px 20px; background: rgba(255,255,255,0.1); border: none; border-radius: 8px; color: white; cursor: pointer; margin-bottom: 1rem; }
-.email-meta { margin: 1rem 0; padding: 1rem; background: rgba(255,255,255,0.05); border-radius: 8px; }
-.email-body { padding: 2rem; background: rgba(255,255,255,0.05); border-radius: 8px; margin: 1rem 0; line-height: 1.6; }
-.delete-btn { padding: 10px 20px; background: #e74c3c; border: none; border-radius: 8px; color: white; cursor: pointer; }
-.compose-form input, .compose-form textarea { width: 100%; padding: 12px; margin: 10px 0; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; }
-.compose-form button { padding: 12px 30px; background: #00d2ff; border: none; border-radius: 8px; color: white; cursor: pointer; }
-.empty-state { text-align: center; padding: 3rem; color: rgba(255,255,255,0.5); }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: Arial, sans-serif; background: #1a1a2e; color: white; min-height: 100vh; }
+.app { max-width: 800px; margin: 0 auto; padding: 20px; }
+.header { text-align: center; margin-bottom: 30px; }
+.header h1 { color: #00d2ff; font-size: 2.5rem; }
+.nav { display: flex; gap: 10px; margin-bottom: 20px; }
+.nav button { flex: 1; padding: 15px; background: #00d2ff; border: none; border-radius: 8px; color: white; font-size: 1rem; cursor: pointer; }
+.main { background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; min-height: 500px; }
+.inbox h2 { margin-bottom: 20px; color: #00d2ff; }
+.email-card { background: rgba(255,255,255,0.05); padding: 15px; margin: 10px 0; border-radius: 8px; cursor: pointer; transition: background 0.3s; }
+.email-card:hover { background: rgba(255,255,255,0.1); }
+.email-from, .email-to, .email-subject { margin: 5px 0; }
+.email-date { color: rgba(255,255,255,0.6); font-size: 0.9rem; margin-top: 10px; }
+.empty { text-align: center; padding: 50px; color: rgba(255,255,255,0.5); }
+.email-view { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 8px; }
+.back-btn { padding: 10px 20px; background: rgba(255,255,255,0.2); border: none; border-radius: 5px; color: white; cursor: pointer; margin-bottom: 20px; }
+.email-body { margin-top: 20px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 8px; line-height: 1.6; }
+.compose-form h2 { margin-bottom: 20px; color: #00d2ff; }
+.compose-form input, .compose-form textarea { width: 100%; padding: 12px; margin: 10px 0; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; color: white; font-size: 1rem; }
+.compose-form button { width: 100%; padding: 15px; background: #00d2ff; border: none; border-radius: 8px; color: white; font-size: 1.1rem; cursor: pointer; margin-top: 10px; }
