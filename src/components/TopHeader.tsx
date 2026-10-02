@@ -1,29 +1,13 @@
-import { Mail } from 'lucide-react';
+import React from 'react';
 
 export const TopHeader = () => {
   return (
-    <header
-      className="flex items-center gap-3 px-4 py-2.5 flex-shrink-0 z-20 relative"
-      style={{
-        background: 'rgba(15,23,42,0.85)',
-        backdropFilter: 'blur(24px)',
-        WebkitBackdropFilter: 'blur(24px)',
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
-      }}
-    >
-      <div
-        className="w-8 h-8 rounded-xl flex items-center justify-center text-white text-xs font-black flex-shrink-0"
-        style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}
-      >
-        IQ
+    <div className="w-full bg-gradient-to-r from-amber-500 via-rose-500 via-purple-600 to-indigo-600 p-[2px] shadow-lg">
+      <div className="bg-slate-950/90 backdrop-blur-md py-1.5 px-4 text-center border-b border-white/10 flex justify-center items-center">
+        <h2 className="text-amber-200 font-serif text-sm md:text-base font-bold tracking-widest drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
+          بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+        </h2>
       </div>
-      <div>
-        <div className="text-sm font-black text-white leading-none">IQMAIL</div>
-        <div className="text-[9px] text-slate-400 font-medium">ESOneWorld — A Global Family Platform</div>
-      </div>
-      <div className="ml-auto">
-        <Mail size={18} className="text-slate-400" />
-      </div>
-    </header>
+    </div>
   );
 };
