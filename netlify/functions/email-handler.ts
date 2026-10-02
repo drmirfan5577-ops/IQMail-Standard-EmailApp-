@@ -1,18 +1,15 @@
-// Netlify Function: email-handler
-// This function is ready for Supabase integration
-// Deploy: netlify deploy --prod
-
 import { Handler, HandlerEvent, HandlerContext } from "@netlify/functions";
-
-// Supabase client would be initialized here:
-// import { createClient } from '@supabase/supabase-js'
-// const supabase = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_ANON_KEY!)
 
 interface EmailPayload {
   action: "list" | "get" | "send" | "update" | "delete";
   emailId?: string;
   category?: string;
-  data?: Record<string, unknown>;
+  data?: {
+    to: string;
+    subject: string;
+    html?: string;
+    text?: string;
+  };
 }
 
 export const handler: Handler = async (
@@ -26,7 +23,6 @@ export const handler: Handler = async (
     "Access-Control-Allow-Headers": "Content-Type, Authorization",
   };
 
-  // Handle CORS preflight
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 200, headers, body: "" };
   }
@@ -37,63 +33,61 @@ export const handler: Handler = async (
       : { action: "list" };
 
     switch (payload.action) {
-      case "list":
-        // TODO: Replace with Supabase query
-        // const { data, error } = await supabase
-        //   .from('emails')
-        //   .select('*')
-        //   .eq('category', payload.category || 'inbox')
-        //   .order('timestamp', { ascending: false })
-        return {
-          statusCode: 200,
-          headers,
+      case "send": {
+        if (!payload.data?.to || !payload.data?.subject) {
+          return {
+            statusCode: 400,
+            headers,
+            body: JSON.stringify({ success: false, error: "Missing to or subject" }),
+          };
+        }
+
+        // Resend API Call with exact authenticated domain sender
+        const resendResponse = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
-            success: true,
-            message: "Supabase integration pending — connect your database",
-            emails: [],
+            from: "IQMail Admin <admin@send.iqmail.online>", // Verified Subdomain
+            to: [payload.data.to],
+            subject: payload.data.subject,
+            html: payload.data.html || payload.data.text || "<p>Empty message</p>",
           }),
-        };
+        });
 
-      case "send":
-        // TODO: Replace with Supabase insert + email service
-        // const { data, error } = await supabase
-        //   .from('emails')
-        //   .insert([payload.data])
+        const resendResult = await resendResponse.json();
+
+        if (!resendResponse.ok) {
+          console.error("Resend API Error:", resendResult);
+          return {
+            statusCode: resendResponse.status,
+            headers,
+            body: JSON.stringify({ success: false, error: resendResult }),
+          };
+        }
+
         return {
           statusCode: 200,
           headers,
-          body: JSON.stringify({ success: true, message: "Send handler ready" }),
+          body: JSON.stringify({ success: true, message: "Email sent via Resend", data: resendResult }),
         };
-
-      case "update":
-        // TODO: Replace with Supabase update
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({ success: true, message: "Update handler ready" }),
-        };
-
-      case "delete":
-        // TODO: Replace with Supabase delete
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({ success: true, message: "Delete handler ready" }),
-        };
+      }
 
       default:
         return {
-          statusCode: 400,
+          statusCode: 200,
           headers,
-          body: JSON.stringify({ success: false, error: "Unknown action" }),
+          body: JSON.stringify({ success: true, message: "Action handler ready" }),
         };
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("Email handler error:", error);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ success: false, error: "Internal server error" }),
+      body: JSON.stringify({ success: false, error: error.message || "Internal server error" }),
     };
   }
 };
