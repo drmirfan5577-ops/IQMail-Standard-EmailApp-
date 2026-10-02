@@ -1,3 +1,14 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-white font-sans antialiased selection:bg-pink-500 selection:text-white min-h-screen overflow-x-hidden;
+  }
+}
+
+/* Dynamic 4D Launchers & Glass Display Shaders */
 .theme-crimson-ice {
   background: radial-gradient(circle at top left, #881337, #0f172a 80%);
 }
@@ -13,4 +24,12 @@
 
 .theme-bokeh-neon {
   background: radial-gradient(circle at center, #78350f, #3b0764 50%, #090d16 100%);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.125);
 }
