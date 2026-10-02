@@ -3,7 +3,7 @@ import {
   Shield, Lock, Sparkles, Server, Cpu, Layers, CheckCircle2, 
   ExternalLink, Globe, Database, Code, Cloud, Youtube, Facebook, MessageSquare 
 } from 'lucide-react';
-import { processVoiceToEnterpriseMail } from '../lib/gemeniMailEngine';
+import { processVoiceToEnterpriseMail } from '../lib/geminiMailEngine';
 
 export const AdminPanelPage = ({ onSelectTheme }: { onSelectTheme: (themeClass: string) => void }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
