@@ -38,29 +38,38 @@ export const handler: Handler = async (
           return {
             statusCode: 400,
             headers,
-            body: JSON.stringify({ success: false, error: "Missing to or subject" }),
+            body: JSON.stringify({ success: false, error: "Missing required fields: to or subject" }),
           };
         }
 
-        // Resend API Call with exact authenticated domain sender
+        // Active Resend API Integration
+        const resendApiKey = process.env.RESEND_API_KEY;
+        if (!resendApiKey) {
+          return {
+            statusCode: 500,
+            headers,
+            body: JSON.stringify({ success: false, error: "RESEND_API_KEY environment variable is missing" }),
+          };
+        }
+
         const resendResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
           headers: {
-            "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
+            "Authorization": `Bearer ${resendApiKey}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: "IQMail Admin <admin@send.iqmail.online>", // Verified Subdomain
+            from: "IQMail Admin <admin@send.iqmail.online>",
             to: [payload.data.to],
             subject: payload.data.subject,
-            html: payload.data.html || payload.data.text || "<p>Empty message</p>",
+            html: payload.data.html || payload.data.text || "<p>No content provided</p>",
           }),
         });
 
         const resendResult = await resendResponse.json();
 
         if (!resendResponse.ok) {
-          console.error("Resend API Error:", resendResult);
+          console.error("Resend API Delivery Error:", resendResult);
           return {
             statusCode: resendResponse.status,
             headers,
@@ -71,7 +80,7 @@ export const handler: Handler = async (
         return {
           statusCode: 200,
           headers,
-          body: JSON.stringify({ success: true, message: "Email sent via Resend", data: resendResult }),
+          body: JSON.stringify({ success: true, message: "Email successfully dispatched via Resend", data: resendResult }),
         };
       }
 
@@ -79,15 +88,15 @@ export const handler: Handler = async (
         return {
           statusCode: 200,
           headers,
-          body: JSON.stringify({ success: true, message: "Action handler ready" }),
+          body: JSON.stringify({ success: true, message: "Handler operational" }),
         };
     }
   } catch (error: any) {
-    console.error("Email handler error:", error);
+    console.error("Fatal Email Handler Error:", error);
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ success: false, error: error.message || "Internal server error" }),
+      body: JSON.stringify({ success: false, error: error.message || "Internal Server Error" }),
     };
   }
 };
