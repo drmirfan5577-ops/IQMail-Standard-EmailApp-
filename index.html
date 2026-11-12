@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>IQMAIL — Global Family Platform by ESOneWorld</title>
+    <title>IQMAIL â Global Family Platform by ESOneWorld</title>
     <meta name="description" content="IQMAIL is a global family email platform by ESOneWorld, connecting families, communities and professionals across 90+ countries with clarity, security and intelligence." />
     <meta name="keywords" content="IQMAIL, ESOneWorld, global family platform, email management, family communication, digital mail" />
     <meta name="author" content="ESOneWorld" />
@@ -19,7 +19,7 @@
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://iqmail.esonworld.com" />
-    <meta property="og:title" content="IQMAIL — Global Family Platform by ESOneWorld" />
+    <meta property="og:title" content="IQMAIL â Global Family Platform by ESOneWorld" />
     <meta property="og:description" content="IQMAIL is a global family email platform by ESOneWorld, connecting families and communities across 90+ countries." />
     <meta property="og:image" content="/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -30,8 +30,8 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:url" content="https://iqmail.esonworld.com" />
-    <meta name="twitter:title" content="IQMAIL — Global Family Platform" />
-    <meta name="twitter:description" content="IQMAIL by ESOneWorld — Global Family Email Platform" />
+    <meta name="twitter:title" content="IQMAIL â Global Family Platform" />
+    <meta name="twitter:description" content="IQMAIL by ESOneWorld â Global Family Email Platform" />
     <meta name="twitter:image" content="/og-image.jpg" />
 
     <!-- Favicon -->
@@ -57,5 +57,54 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
-  </body>
+  <script>/* DeployHub badge clearance */
+(function(){
+  if(window.__nhBadgeSafe)return;window.__nhBadgeSafe=1;
+  function findBadge(){
+    var nodes=document.querySelectorAll('a,iframe,div'),i,el,st,r;
+    for(i=0;i<nodes.length;i++){
+      el=nodes[i];st=getComputedStyle(el);
+      if(st.position!=='fixed'&&st.position!=='sticky')continue;
+      if(st.display==='none'||st.visibility==='hidden'||+st.opacity===0)continue;
+      r=el.getBoundingClientRect();
+      if(r.width<60||r.height<18||r.width>320||r.height>120)continue;
+      if(r.bottom>window.innerHeight-56&&r.right>window.innerWidth-56)return {el:el,w:r.width,h:r.height};
+    }
+    return null;
+  }
+  var settled=false;
+  function clear(){
+    if(settled)return;
+    var badge=findBadge();
+    if(!badge)return;
+    settled=true;
+    var pad=Math.ceil(badge.w)+14;
+    var bars=[],all=document.querySelectorAll('body *'),i,el,st,r;
+    for(i=0;i<all.length;i++){
+      el=all[i];st=getComputedStyle(el);
+      if(st.position!=='fixed'&&st.position!=='sticky')continue;
+      if(st.display==='none'||st.visibility==='hidden')continue;
+      r=el.getBoundingClientRect();
+      if(r.height<=120&&r.width>window.innerWidth*0.5&&r.bottom>window.innerHeight-28)bars.push(el);
+    }
+    if(bars.length){
+      for(i=0;i<bars.length;i++){
+        var cur=parseFloat(getComputedStyle(bars[i]).paddingRight)||0;
+        bars[i].style.paddingRight=(cur+pad)+'px';
+        bars[i].style.boxSizing='border-box';
+      }
+    } else {
+      var body=getComputedStyle(document.body);
+      document.body.style.paddingBottom=((parseFloat(body.paddingBottom)||0)+Math.ceil(badge.h)+10)+'px';
+    }
+  }
+  ['load','resize','orientationchange'].forEach(function(event){window.addEventListener(event,clear);});
+  document.addEventListener('DOMContentLoaded',clear);
+  setTimeout(clear,700);setTimeout(clear,2200);
+  var timer;
+  var schedule=function(){clearTimeout(timer);timer=setTimeout(clear,300);};
+  new MutationObserver(schedule).observe(document.documentElement,{childList:true,subtree:true});
+})();
+</script>
+</body>
 </html>
